@@ -132,7 +132,7 @@ h4 {
   color: #430129;
   font-size: 12px;
   font-weight: bold;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   padding: 10px 20px;
   background: #d2b1c346;
   border-radius: 5px;
@@ -276,4 +276,33 @@ h4 {
   color: #ea9341;
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* Animation for the message change */
+@keyframes fadeInGrow {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.touch-message {
+  font-family: "Amatic SC", cursive;
+  font-size: 24px;
+  color: #ea9341;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.animated-message {
+  animation: fadeInGrow 0.6s ease-in-out;
 }

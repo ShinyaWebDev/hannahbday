@@ -1,10 +1,12 @@
 const card = document.querySelector(".card");
 const heartsContainer = document.querySelector(".hearts-container");
+const touchMessage = document.querySelector(".touch-message");
 
 // Show hearts on hover
 card.addEventListener("mouseenter", () => {
   heartsContainer.style.display = "block"; // Show hearts container
-  startFallingHearts(); // Start the hearts animation
+  startFallingHearts();
+  changeMessage("Thank you 🥰"); // Start the hearts animation
 });
 
 // Hide hearts when hover ends
@@ -30,4 +32,14 @@ function startFallingHearts() {
 
   // Stop the interval after hover ends
   card.addEventListener("mouseleave", () => clearInterval(heartsInterval));
+}
+
+function changeMessage(newMessage) {
+  touchMessage.textContent = newMessage;
+  touchMessage.classList.add("animated-message");
+
+  // Remove animation class after animation ends to allow replay
+  setTimeout(() => {
+    touchMessage.classList.remove("animated-message");
+  }, 600); // Matches animation duration
 }
