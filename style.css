@@ -397,16 +397,36 @@ h4 {
 
 /* Position and style for subtle firework button */
 /* Subtle firework button */
+
 .firework-btn {
   position: absolute;
-  top: -20px; /* Adjust to position above the heading */
-  right: 20px; /* Position to the right of the heading */
+  top: -20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
   background: none;
   border: none;
   cursor: pointer;
   font-size: 24px;
-  opacity: 0.6; /* Subtle opacity */
-  color: #fa2222; /* Match theme color */
+  opacity: 0.8;
+  color: #fa2222; /* Theme color */
+  animation: shake 4s ease-in-out infinite; /* Shake every few seconds */
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0); /* Static at start and end */
+  }
+  5%,
+  15%,
+  25% {
+    transform: translateX(-2px); /* Quick shake left */
+  }
+  10%,
+  20% {
+    transform: translateX(2px); /* Quick shake right */
+  }
+  /* Static from 30% to 100% */
 }
 
 .go-back-btn {
