@@ -306,3 +306,66 @@ h4 {
 .animated-message {
   animation: fadeInGrow 0.6s ease-in-out;
 }
+
+.fireworks-overlay {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  z-index: 1000; /* On top of everything else */
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Position and style for subtle firework button */
+/* Subtle firework button */
+.firework-btn {
+  position: absolute;
+  top: -20px; /* Adjust to position above the heading */
+  right: 20px; /* Position to the right of the heading */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  opacity: 0.6; /* Subtle opacity */
+  color: #fa2222; /* Match theme color */
+}
+
+.go-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #f8d210, #f39c12); /* Gradient */
+  color: #013243;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001; /* Above canvas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  animation: pulse 2s infinite ease-in-out; /* Pulsing animation */
+}
+
+/* Pulse animation for subtle scaling */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
