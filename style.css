@@ -40,11 +40,11 @@ h4 {
   transition: 1s;
 }
 
-.card:hover {
+/* .card:hover {
   transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.2);
   box-shadow: inset 20px 0 50px rgba(62, 62, 62, 0.5),
     0 10px 100px rgba(0, 0, 0, 0.5);
-}
+} */
 
 .card:before {
   content: "";
@@ -92,7 +92,54 @@ h4 {
   max-height: 400px;
 }
 
-.card:hover .imgBox {
+.card {
+  color: #013243; /* SHERPA BLUE */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 280px;
+  height: 400px;
+  background: #e0e1dc;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) perspective(2000px);
+  box-shadow: inset 300px 0 50px rgba(0, 0, 0, 0.5),
+    20px 0 60px rgba(0, 0, 0, 0.5);
+  transition: 1s;
+}
+
+.card.flipped {
+  transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.2);
+  box-shadow: inset 20px 0 50px rgba(62, 62, 62, 0.5),
+    0 10px 100px rgba(0, 0, 0, 0.5);
+}
+
+.card .imgBox {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-origin: left;
+  transition: 0.7s;
+}
+
+.card.flipped .imgBox {
+  transform: rotateY(-135deg);
+}
+
+.card .bark {
+  position: absolute;
+  background: #e0e1dc;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.7s;
+}
+
+.card.flipped .bark {
+  opacity: 1;
+  box-shadow: 300px 200px 100px rgba(0, 0, 0, 0.4) inset;
+}
+
+/* .card:hover .imgBox {
   transform: rotateY(-135deg);
 }
 
@@ -100,7 +147,7 @@ h4 {
   opacity: 1;
   transition: 0.6s;
   box-shadow: 300px 200px 100px rgba(0, 0, 0, 0.4) inset;
-}
+} */
 
 .card .details {
   position: absolute;
@@ -210,10 +257,17 @@ h4 {
 
 .heart {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 12px; /* Adjust size as needed */
+  height: 12px;
   background-color: rgb(240, 120, 140);
-  clip-path: polygon(50% 100%, 0% 70%, 15% 0%, 50% 20%, 85% 0%, 100% 70%);
+  clip-path: polygon(
+    50% 100%,
+    /* Bottom center point */ 0% 30%,
+    /* Left dip */ 15% 0%,
+    /* Top left curve */ 50% 20%,
+    /* Top center dip */ 85% 0%,
+    /* Top right curve */ 100% 30% /* Right dip */
+  );
   animation: fall 4s linear infinite;
 }
 
