@@ -1,4 +1,4 @@
-// Initial References and variable declarations
+// References and variable declarations
 const card = document.querySelector(".card");
 const heartsContainer = document.querySelector(".hearts-container");
 const touchMessage = document.querySelector(".touch-message");
@@ -6,7 +6,6 @@ const fireworkBtn = document.querySelector(".firework-btn");
 const fireworksOverlay = document.querySelector(".fireworks-overlay");
 const goBackBtn = document.querySelector(".go-back-btn");
 
-// Example messages to alternate between
 const messages = [
   "Thank you 🥰",
   "So glad you’re here! 🎉",
@@ -20,77 +19,85 @@ const messages = [
   "Much love! 💖",
 ];
 
-let lastMessageIndex = 0; // Track last shown message index
+let lastMessageIndex = -1;
 
-// Add a click event to open the card only when it is closed
+// Open card only if it is not already opened
 if (card) {
   card.addEventListener("click", (e) => {
-    e.stopPropagation(); // Prevent the click from propagating to the document
-
-    // Check if the card is not already flipped
+    e.stopPropagation();
     if (!card.classList.contains("flipped")) {
-      card.classList.add("flipped"); // Only add flipped class if it's not already flipped
-
-      // Show hearts and update message when card is flipped open
+      card.classList.add("flipped");
       if (heartsContainer) heartsContainer.style.display = "block";
       startFallingHearts();
-      showRandomMessage(); // Show alternating messages
+      showRandomMessage();
     }
   });
 }
 
-// Detect click outside the card to close it
+// Close card on click outside
 document.addEventListener("click", (e) => {
   if (card.classList.contains("flipped") && !card.contains(e.target)) {
-    card.classList.remove("flipped"); // Close the card by removing the flipped class
+    card.classList.remove("flipped");
     resetHearts();
   }
 });
 
-// Function to reset hearts when closing the card
+// Reset hearts when card is closed
 function resetHearts() {
   if (heartsContainer) {
     heartsContainer.style.display = "none";
-    heartsContainer.innerHTML = ""; // Clear hearts to reset
+    heartsContainer.innerHTML = "";
   }
 }
 
-// Function to show a random message each time the card is opened
+// Show a random message from the list
 function showRandomMessage() {
-  // Choose a new message index, different from the last shown message
   let newIndex;
   do {
     newIndex = Math.floor(Math.random() * messages.length);
   } while (newIndex === lastMessageIndex);
 
-  // Update the message and save the new index
   changeMessage(messages[newIndex]);
   lastMessageIndex = newIndex;
 }
 
-// Falling hearts animation
+// Falling hearts animation using SVG
 function startFallingHearts() {
   const heartsInterval = setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-
-    // Set random position and size for each heart
-    heart.style.left = `${Math.random() * 100}%`;
-    heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
-    const randomSize = Math.random() * 20 + 10; // Size range between 10px and 30px
+    const heart = createSVGHeart();
+    const randomSize = Math.random() * 20 + 10;
     heart.style.width = `${randomSize}px`;
     heart.style.height = `${randomSize}px`;
-
+    heart.style.left = `${Math.random() * 100}%`;
+    heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
     if (heartsContainer) heartsContainer.appendChild(heart);
 
     // Remove heart after animation ends
     setTimeout(() => heart.remove(), 4000);
   }, 300);
 
-  // Stop hearts animation on card close
+  // Stop hearts animation when closing the card
   document.addEventListener("click", () => clearInterval(heartsInterval), {
     once: true,
   });
+}
+
+// Create SVG heart element
+function createSVGHeart() {
+  const svgNS = "http://www.w3.org/2000/svg";
+  const heartSVG = document.createElementNS(svgNS, "svg");
+  heartSVG.setAttribute("viewBox", "0 0 24 24");
+  heartSVG.setAttribute("class", "heart");
+
+  const path = document.createElementNS(svgNS, "path");
+  path.setAttribute(
+    "d",
+    "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+  );
+  path.setAttribute("fill", "rgb(240, 120, 140)");
+  heartSVG.appendChild(path);
+
+  return heartSVG;
 }
 
 // Update touch message
@@ -114,6 +121,6 @@ if (fireworkBtn) {
 if (goBackBtn) {
   goBackBtn.addEventListener("click", () => {
     if (fireworksOverlay) fireworksOverlay.style.display = "none";
-    if (typeof resetParticles === "function") resetParticles(); // Clear particles
+    if (typeof resetParticles === "function") resetParticles();
   });
 }

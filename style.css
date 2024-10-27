@@ -257,18 +257,18 @@ h4 {
 
 .heart {
   position: absolute;
-  width: 12px; /* Adjust size as needed */
-  height: 12px;
-  background-color: rgb(240, 120, 140);
-  clip-path: polygon(
-    50% 100%,
-    /* Bottom center point */ 0% 30%,
-    /* Left dip */ 15% 0%,
-    /* Top left curve */ 50% 20%,
-    /* Top center dip */ 85% 0%,
-    /* Top right curve */ 100% 30% /* Right dip */
-  );
   animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
 .color1,
