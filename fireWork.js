@@ -123,3 +123,30 @@ function resetParticles() {
     animationFrameId = null; // Reset the ID to avoid re-cancelling
   }
 }
+
+// Load firework sounds
+const sounds = [
+  new Audio("sound/firework1.mp3"),
+  new Audio("sound/firework2.mp3"),
+];
+
+// Function to play a random firework sound
+function playFireworkSound() {
+  const sound = sounds[Math.floor(Math.random() * sounds.length)];
+  sound.currentTime = 0; // Reset to start in case it's still playing
+  sound.play();
+}
+
+// Modified createFirework to include sound
+function createFirework() {
+  playFireworkSound(); // Play sound for each firework
+
+  let numberOfParticles = randomNumberGenerator(30, 200);
+  for (let i = 0; i < numberOfParticles; i++) {
+    let particle = new Particle();
+    let vy = Math.sqrt(25 - particle.vx * particle.vx);
+    particle.vy =
+      Math.abs(particle.vy) > vy ? (particle.vy > 0 ? vy : -vy) : particle.vy;
+    particles.push(particle);
+  }
+}
