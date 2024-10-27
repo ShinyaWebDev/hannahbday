@@ -276,8 +276,7 @@ h4 {
   transition: 0.3s ease;
 }
 
-.color1:hover,
-.contact-link:hover {
+.clicked {
   animation: bounce 1.6s;
 }
 
@@ -286,7 +285,7 @@ h4 {
     0 0 20px rgba(255, 174, 204, 0.5);
 }
 
-.contact-link:hover {
+.contact-link.clicked {
   box-shadow: 0 0 15px rgba(255, 105, 180, 0.7),
     0 0 30px rgba(255, 105, 180, 0.5);
 }
@@ -307,15 +306,31 @@ h4 {
   }
 }
 
-/* Additional custom styling for the heart container */
-.hearts-container {
-  display: none;
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-8px);
+  }
 }
 
+/* Additional custom styling for the heart container */
+/* .hearts-container {
+  display: none;
+} */
+
 /* Reveal hearts on card hover */
-.card:hover .hearts-container {
+/* .card:hover .hearts-container {
   display: block;
-}
+} */
 
 .playland-name {
   font-weight: bold;

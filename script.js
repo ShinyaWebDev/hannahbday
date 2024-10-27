@@ -5,6 +5,7 @@ const touchMessage = document.querySelector(".touch-message");
 const fireworkBtn = document.querySelector(".firework-btn");
 const fireworksOverlay = document.querySelector(".fireworks-overlay");
 const goBackBtn = document.querySelector(".go-back-btn");
+const animatedElements = document.querySelectorAll(".color1, .contact-link");
 
 const messages = [
   "Thank you 🥰",
@@ -24,12 +25,21 @@ let lastMessageIndex = -1;
 // Open card only if it is not already opened
 if (card) {
   card.addEventListener("click", (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevent the click from propagating to the document
+
     if (!card.classList.contains("flipped")) {
-      card.classList.add("flipped");
+      card.classList.add("flipped"); // Only add flipped class if it's not already flipped
+
+      // Show hearts and update message when card is flipped open
       if (heartsContainer) heartsContainer.style.display = "block";
       startFallingHearts();
-      showRandomMessage();
+      showRandomMessage(); // Show alternating messages
+
+      // Trigger animation for animated elements
+      animatedElements.forEach((element) => {
+        element.classList.add("clicked");
+        setTimeout(() => element.classList.remove("clicked"), 1600); // Reset after animation duration
+      });
     }
   });
 }
